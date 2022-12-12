@@ -17,9 +17,9 @@ func main () {
 
   var wg sync.WaitGroup
 
-  root := "./tree"
+  root := "tree"
   oldStr := "f"
-  newStr := "g"
+  newStr := "y"
   slice := make([]string, 0)
 
   filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
@@ -28,17 +28,18 @@ func main () {
       return err
     }
 
-    wg.Add(1)
-    go func() {
-      slice = append(slice, path)
-      wg.Done()
+    if strings.Contains(info.Name(), oldStr) {
+      wg.Add(1)
+      go func() {
+        slice = append(slice, path)
+        wg.Done()
       }()
+    }
 
     return nil
   })
 
   wg.Wait()
-
   if len(slice) > 0 {
     for i := len(slice) - 1; i >= 0; i-- {
       renameFilesAndFolders(slice[i], oldStr, newStr)
