@@ -8,11 +8,11 @@ import (
   "strings"
 )
 
-func renameFilesAndFolders(path string, oldStr string, newStr string) error {
+/*func renameFilesAndFolders(path string, oldStr string, newStr string) error {
   newPath := strings.Replace(path, oldStr, newStr, -1)
   os.Rename(path, newPath)
   return nil
-}
+}*/
 
 
 func renameFilesAndFolders(path string, oldStr string, newStr string) error {
