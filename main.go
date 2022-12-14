@@ -8,6 +8,7 @@ import (
   "strings"
 )
 
+
 /*func renameFilesAndFolders(path string, oldStr string, newStr string) error {
   newPath := strings.Replace(path, oldStr, newStr, -1)
   os.Rename(path, newPath)
@@ -32,9 +33,11 @@ func main () {
 
   var wg sync.WaitGroup
 
+  // directory, string to be replaced and string to replace it
   root := "tree"
-  oldStr := "1"
-  newStr := "p"
+  oldStr := "f"
+  newStr := "y"
+
   slice := make([]string, 0)
 
   filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
@@ -56,8 +59,8 @@ func main () {
 
   wg.Wait()
   if len(slice) > 0 {
-    for i := len(slice) - 1; i >= 0; i-- {
-      renameFilesAndFolders(slice[i], oldStr, newStr)
+    for _, path := range slice {
+      renameFilesAndFolders(path, oldStr, newStr)
     }
   }
 }
